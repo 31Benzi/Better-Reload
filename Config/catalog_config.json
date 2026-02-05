@@ -1,0 +1,51 @@
+{
+  "//": "BR Item Shop Config",
+  "daily1": {
+    "itemGrants": [
+      "AthenaCharacter:CID_442_Athena_Commando_F_BannerA"
+    ],
+    "price": 800
+  },
+  "daily2": {
+    "itemGrants": [
+      "AthenaCharacter:CID_242_Athena_Commando_F_Bullseye"
+    ],
+    "price": 800
+  },
+  "daily3": {
+    "itemGrants": [
+      "AthenaDance:EID_ShrimpStroll_Sync"
+    ],
+    "price": 200
+  },
+  "daily4": {
+    "itemGrants": [
+      "AthenaBackpack:BID_140_StreetOpsMale"
+    ],
+    "price": 1200
+  },
+  "daily5": {
+    "itemGrants": [
+      "AthenaGlider:Glider_ID_045_CarbideBlack"
+    ],
+    "price": 1200
+  },
+  "daily6": {
+    "itemGrants": [
+      "AthenaPickaxe:Pickaxe_ID_064_Gumshoe"
+    ],
+    "price": 800
+  },
+  "featured1": {
+    "itemGrants": [
+      "AthenaCharacter:CID_429_Athena_Commando_F_NeonLines"
+    ],
+    "price": 1200
+  },
+  "featured2": {
+    "itemGrants": [
+      "AthenaCharacter:CID_187_Athena_Commando_F_FuzzyBearPanda"
+    ],
+    "price": 2000
+  }
+}
