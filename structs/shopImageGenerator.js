@@ -26,11 +26,11 @@ async function generateShopImage(itemShop) {
     const canvas = createCanvas(canvasWidth, canvasHeight + 60);
     const ctx = canvas.getContext('2d');
 
-    // Background
+
     ctx.fillStyle = '#0e1218';
     ctx.fillRect(0, 0, canvasWidth, canvasHeight + 60);
 
-    // Main Title
+
     const dateStr = new Date().toISOString().split('T')[0];
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 32px Arial';
@@ -41,7 +41,7 @@ async function generateShopImage(itemShop) {
     const drawSection = async (title, items) => {
         if (items.length === 0) return;
 
-        // Draw Section Title
+
         ctx.fillStyle = '#ffffff';
         ctx.font = 'bold 24px Arial';
         ctx.fillText(title.toUpperCase(), margin, currentY + 30);
@@ -72,46 +72,46 @@ async function drawItemCard(ctx, item, x, y, width, height) {
     const rarity = item.rarity?.value?.toLowerCase() || 'common';
     const rarityColor = getRarityColor(rarity);
 
-    // Card Background with rounded corners
+
     ctx.fillStyle = '#161d27';
     drawRoundedRect(ctx, x, y, width, height, 10);
     ctx.fill();
 
-    // Rarity Bar at top
+
     ctx.fillStyle = rarityColor;
     drawRoundedRect(ctx, x, y, width, 5, { tl: 10, tr: 10, bl: 0, br: 0 });
     ctx.fill();
 
-    // Load Item Image
+
     try {
         const imageUrl = item.images?.featured || item.images?.icon || item.images?.smallIcon;
         if (imageUrl) {
             const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
             const img = await loadImage(Buffer.from(response.data));
 
-            // Draw image centered
+
             const imgSize = Math.min(width - 40, height - 120);
             const imgX = x + (width - imgSize) / 2;
             const imgY = y + 30;
             ctx.drawImage(img, imgX, imgY, imgSize, imgSize);
         }
     } catch (err) {
-        // console.error(`Failed to load image for ${item.name}:`, err.message);
+
     }
 
-    // Name
+
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 16px Arial';
     const name = item.name || 'Unknown';
     ctx.fillText(name, x + 15, y + height - 65);
 
-    // Rarity Text
+
     ctx.fillStyle = '#8e9297';
     ctx.font = '13px Arial';
     const rarityName = item.rarity?.displayValue || 'Unknown';
     ctx.fillText(rarityName, x + 15, y + height - 45);
 
-    // Price
+
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 14px Arial';
     const price = `${item.price || 0} V-Bucks`;

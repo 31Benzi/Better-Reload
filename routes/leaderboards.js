@@ -6,8 +6,7 @@ const { verifyToken, verifyClient } = require("../tokenManager/tokenVerify.js");
 const functions = require("../structs/functions.js");
 const log = require("../structs/log.js");
 
-app.get("/*/api/statsv2/leaderboards/:leaderboardName", async (req, res) => {
-    log.debug(`GET /*/api/statsv2/leaderboards/${req.params.leaderboardName} called`);
+app.get("api/statsv2/leaderboards/${req.params.leaderboardName} called`);
     try {
         const playlist = req.params.leaderboardName.split("playlist_default")[1];
         const typeStat = req.params.leaderboardName.split("_keyboardmouse")[0].split("br_")[1];
@@ -91,8 +90,7 @@ app.post("/fortnite/api/leaderboards/type/global/stat/:leaderboardName/window/:t
     });
 });
 
-app.post("/*/api/statsv2/query", verifyToken, async (req, res) => {
-    log.debug(`POST /*/api/statsv2/query called`);
+app.post("api/statsv2/query called`);
     if (!req.body.stats) return res.status(400).end();
     const statKey = req.body.stats[0];
     const playlist = statKey.split("playlist_default")[1];

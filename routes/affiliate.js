@@ -39,19 +39,7 @@ app.get("/affiliate/api/public/affiliates/slug/:slug", async (req, res) => {
     }
 });
 
-app.post("/fortnite/api/game/v2/profile/*/client/SetAffiliateName", verifyToken, async (req, res) => {
-    const profiles = await Profile.findOne({ accountId: req.params[0] });
-    let profile = profiles.profiles[req.query.profileId];
-
-    var ApplyProfileChanges = [];
-    var BaseRevision = profile.rvn || 0;
-    var QueryRevision = req.query.rvn || -1;
-    var StatChanged = false;
-
-    var slug = req.body.affiliateName;
-    var lccode = slug.toLowerCase();
-
-    log.debug(`POST /fortnite/api/game/v2/profile/*/client/SetAffiliateName called with slug: ${slug}`);
+app.post("/fortnite/api/game/v2/profileclient/SetAffiliateName called with slug: ${slug}`);
 
     const code = await codes.findOne({ code_lower: lccode });
 

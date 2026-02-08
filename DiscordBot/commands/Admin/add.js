@@ -216,25 +216,25 @@ module.exports = {
                 itemsToGive = allItems.items;
             } else if (pack === "og") {
                 const ogIds = [
-                    "AthenaCharacter:CID_039_Athena_Commando_F_Disco", // Sparkle Specialist
-                    "AthenaCharacter:CID_035_Athena_Commando_M_Medieval", // Black Knight
-                    "AthenaCharacter:CID_032_Athena_Commando_M_Medieval", // Blue Squire
-                    "AthenaCharacter:CID_033_Athena_Commando_F_Medieval", // Royale Knight
-                    "AthenaCharacter:CID_032_Athena_Commando_F_Medieval", // Royale Knight ID check
-                    "AthenaCharacter:CID_028_Athena_Commando_F", // Renegade Raider
-                    "AthenaCharacter:CID_017_Athena_Commando_M", // Aerial Assault Trooper
-                    "AthenaCharacter:CID_030_Athena_Commando_M_Halloween", // Skull Trooper
-                    "AthenaCharacter:CID_029_Athena_Commando_F_Halloween", // Ghoul Trooper
-                    "AthenaPickaxe:Pickaxe_Lockjaw", // Raider's Revenge
-                    "AthenaPickaxe:Pickaxe_ID_013_Teslacoil", // AC/DC
-                    "AthenaGlider:Glider_Warthog", // Mako
-                    "AthenaGlider:Umbrella_Snowflake", // Snowflake
-                    "AthenaDance:EID_Floss", // Floss
-                    "AthenaDance:EID_TakeTheL", // Take The L
-                    "AthenaDance:EID_BestMates", // Best Mates
-                    "AthenaDance:EID_Hype", // Hype
-                    "AthenaDance:EID_GoodVibes", // Orange Justice
-                    "AthenaDance:EID_RideThePony_Athena" // Ride The Pony
+                    "AthenaCharacter:CID_039_Athena_Commando_F_Disco",
+                    "AthenaCharacter:CID_035_Athena_Commando_M_Medieval",
+                    "AthenaCharacter:CID_032_Athena_Commando_M_Medieval",
+                    "AthenaCharacter:CID_033_Athena_Commando_F_Medieval",
+                    "AthenaCharacter:CID_032_Athena_Commando_F_Medieval",
+                    "AthenaCharacter:CID_028_Athena_Commando_F",
+                    "AthenaCharacter:CID_017_Athena_Commando_M",
+                    "AthenaCharacter:CID_030_Athena_Commando_M_Halloween",
+                    "AthenaCharacter:CID_029_Athena_Commando_F_Halloween",
+                    "AthenaPickaxe:Pickaxe_Lockjaw",
+                    "AthenaPickaxe:Pickaxe_ID_013_Teslacoil",
+                    "AthenaGlider:Glider_Warthog",
+                    "AthenaGlider:Umbrella_Snowflake",
+                    "AthenaDance:EID_Floss",
+                    "AthenaDance:EID_TakeTheL",
+                    "AthenaDance:EID_BestMates",
+                    "AthenaDance:EID_Hype",
+                    "AthenaDance:EID_GoodVibes",
+                    "AthenaDance:EID_RideThePony_Athena"
                 ];
 
                 const allItemKeys = Object.keys(allItems.items);

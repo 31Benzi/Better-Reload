@@ -3,7 +3,7 @@ const log = require("../structs/log.js");
 
 let queue = [];
 let matchTimer = null;
-let countdown = 60; // Default 1 minute
+let countdown = 60;
 
 module.exports = async (ws) => {
     const ticketId = functions.MakeID().replace(/-/ig, "");
@@ -21,11 +21,11 @@ module.exports = async (ws) => {
     queue.push(player);
     log.debug(`Player joined matchmaking queue. Total: ${queue.length}`);
 
-    // Restart timer logic or boost countdown
+
     if (queue.length === 1) {
-        countdown = 60; // Reset to 1 minute for the first player
+        countdown = 60;
     } else {
-        countdown = Math.max(0, countdown - 5); // Boost time by 5 seconds (decrease wait)
+        countdown = Math.max(0, countdown - 5);
     }
 
     ws.on('close', () => {
@@ -65,14 +65,14 @@ function startMatchmakingTimer() {
 
         if (countdown > 0) {
             countdown--;
-            // Broadcast the new countdown
+
             queue.forEach(player => {
                 if (player.state === "Queued") {
                     Queued(player.ws, player.ticketId, queue.length, countdown);
                 }
             });
         } else {
-            // Match found! Start assigning and joining
+
             const matchPlayers = [...queue];
             queue = [];
             clearInterval(matchTimer);

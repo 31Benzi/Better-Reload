@@ -680,7 +680,7 @@ function vxGenerateToken(key, payload) {
   const toSign = segments.join(".");
 
   const signature = sjcl.codec.base64.fromBits(hmac.encrypt(toSign));
-  const base64urlSigned = signature.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  const base64urlSigned = signature.replace(/\+/g, "-").replace(/\
 
   segments.push(base64urlSigned);
 
@@ -689,7 +689,7 @@ function vxGenerateToken(key, payload) {
 
 
 function base64URLEncode(value) {
-  return Buffer.from(value).toString('base64').replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  return Buffer.from(value).toString('base64').replace(/\+/g, "-").replace(/\
 }
 
 var lastClient;

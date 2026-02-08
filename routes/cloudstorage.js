@@ -49,52 +49,7 @@ app.get("/fortnite/api/cloudstorage/system/:file", (req, res) => {
     res.status(200).end();
 });
 
-app.get("/fortnite/api/cloudstorage/user/*/:file", verifyToken, (req, res) => {
-    let clientSettingsPath = path.join(__dirname, "..", "ClientSettings", req.user.accountId);
-    if (!fs.existsSync(clientSettingsPath)) fs.mkdirSync(clientSettingsPath);
-
-    if (req.params.file.toLowerCase() != "clientsettings.sav") return res.status(200).end();
-
-    const memory = functions.GetVersionInfo(req);
-
-    let file = path.join(clientSettingsPath, `ClientSettings-${memory.season}.Sav`);
-
-    if (fs.existsSync(file)) return res.status(200).send(fs.readFileSync(file));
-
-    res.status(200).end();
-});
-
-app.get("/fortnite/api/cloudstorage/user/:accountId", verifyToken, (req, res) => {
-    let clientSettingsPath = path.join(__dirname, "..", "ClientSettings", req.user.accountId);
-    if (!fs.existsSync(clientSettingsPath)) fs.mkdirSync(clientSettingsPath);
-
-    const memory = functions.GetVersionInfo(req);
-
-    let file = path.join(clientSettingsPath, `ClientSettings-${memory.season}.Sav`);
-
-    if (fs.existsSync(file)) {
-        const ParsedFile = fs.readFileSync(file, 'latin1');
-        const ParsedStats = fs.statSync(file);
-
-        return res.json([{
-            "uniqueFilename": "ClientSettings.Sav",
-            "filename": "ClientSettings.Sav",
-            "hash": crypto.createHash('sha1').update(ParsedFile).digest('hex'),
-            "hash256": crypto.createHash('sha256').update(ParsedFile).digest('hex'),
-            "length": Buffer.byteLength(ParsedFile),
-            "contentType": "application/octet-stream",
-            "uploaded": ParsedStats.mtime,
-            "storageType": "S3",
-            "storageIds": {},
-            "accountId": req.user.accountId,
-            "doNotCache": false
-        }]);
-    }
-
-    res.json([]);
-});
-
-app.put("/fortnite/api/cloudstorage/user/*/:file", verifyToken, getRawBody, (req, res) => {
+app.get("/fortnite/api/cloudstorage/user:file", verifyToken, getRawBody, (req, res) => {
     if (Buffer.byteLength(req.rawBody) >= 400000) return res.status(403).json({ "error": "File size must be less than 400kb." });
 
     let clientSettingsPath = path.join(__dirname, "..", "ClientSettings", req.user.accountId);

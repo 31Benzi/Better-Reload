@@ -149,50 +149,8 @@ app.get("/v1/avatar/fortnite/ids", async (req, res) => {
     res.json([]);
 });
 
-app.get("/sdk/v1/*", (req, res) => {
-    const sdk = require("./../responses/sdkv1.json");
-    res.json(sdk);
-})
-
-app.get("/epic/id/v2/sdk/accounts", async (req, res) => {
-    let user = await User.findOne({ accountId: req.query.accountId, banned: false }).lean();
-    if (!user) return error.createError(
-        "errors.com.epicgames.account.account_not_found",
-        `Sorry, we couldn't find an account for ${req.query.accountId}`,
-        [req.query.accountId], 18007, undefined, 404, res
-    );
-    res.json([{
-        accountId: user.accountId,
-        displayName: user.username,
-        preferredLanguage: "en",
-        cabinedMode: false,
-        empty: false
-    }]);
-})
-
-app.all("/fortnite/api/game/v2/profileToken/verify/:accountId", (req, res) => {
-    log.debug(`ALL /fortnite/api/game/v2/profileToken/verify/${req.params.accountId} called`);
-
-    if (req.method != "POST") {
-        const err = error.method(req);
-        return res.header(err.header).status(405).send(err.error);
-    }
-
-    res.status(204).send();
-});
-
-app.delete("/account/api/oauth/sessions/kill/*", async (req, res) => {
-    log.debug("DELETE account/api/oauth/sessions/kill/* called");
-    res.status(204);
-    res.end();
-})
-
-app.all("/v1/epic-settings/public/users/*/values", (req, res) => {
-    log.debug("ALL /v1/epic-settings/public/users/*/values called");
-    res.json({});
-})
-
-app.get("/account/api/public/account/*/externalAuths", (req, res) => {
+app.get("/sdk/v1values", (req, res) => {
+    log.debug("ALL /v1/epic-settings/public/usersexternalAuths", (req, res) => {
     log.debug("GET /account/api/public/account/*/externalAuths called");
     res.json([]);
 });

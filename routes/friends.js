@@ -9,28 +9,23 @@ const friendManager = require("../structs/friend.js");
 
 const { verifyToken, verifyClient } = require("../tokenManager/tokenVerify.js");
 
-app.get("/friends/api/v1/*/settings", (req, res) => {
-    log.debug("GET /friends/api/v1/*/settings called");
+app.get("/friends/api/v1settings called");
     res.json({});
 });
 
-app.get("/friends/api/v1/*/blocklist", (req, res) => {
-    log.debug("GET /friends/api/v1/*/blocklist called");
+app.get("/friends/api/v1blocklist called");
     res.json([]);
 });
 
-app.get("/friends/api/public/list/fortnite/*/recentPlayers", (req, res) => {
-    log.debug("GET /friends/api/public/list/fortnite/*/recentPlayers called");
+app.get("/friends/api/public/list/fortniterecentPlayers called");
     res.json([]);
 });
 
-app.get("/friends/api/v1/*/recent/fortnite", (req, res) => {
-    log.debug("GET /friends/api/v1/*/recent/fortnite called");
+app.get("/friends/api/v1recent/fortnite called");
     res.json([]);
 });
 
-app.all("/friends/api/v1/*/friends/:friendId/alias", verifyToken, getRawBody, async (req, res) => {
-    log.debug(`ALL /friends/api/v1/*/friends/${req.params.friendId}/alias called with method ${req.method}`);
+app.all("/friends/api/v1friends/${req.params.friendId}/alias called with method ${req.method}`);
     let friends = await Friends.findOne({ accountId: req.user.accountId });
 
     let validationFail = () => error.createError(
@@ -111,8 +106,8 @@ app.get("/friends/api/public/friends/:accountId", verifyToken, async (req, res) 
     res.json(response);
 });
 
-app.post("/friends/api/*/friends*/:receiverId", verifyToken, async (req, res) => {
-    log.debug(`POST /friends/api/*/friends*/${req.params.receiverId} called`);
+app.post("/friends/api:receiverId", verifyToken, async (req, res) => {
+    log.debug(`POST /friends/api${req.params.receiverId} called`);
     let sender = await Friends.findOne({ accountId: req.user.accountId });
     let receiver = await Friends.findOne({ accountId: req.params.receiverId });
     if (!sender || !receiver) return res.status(403).end();
@@ -129,8 +124,8 @@ app.post("/friends/api/*/friends*/:receiverId", verifyToken, async (req, res) =>
     res.status(204).end();
 });
 
-app.delete("/friends/api/*/friends*/:receiverId", verifyToken, async (req, res) => {
-    log.debug(`DELETE /friends/api/*/friends*/${req.params.receiverId} called`);
+app.delete("/friends/api:receiverId", verifyToken, async (req, res) => {
+    log.debug(`DELETE /friends/api${req.params.receiverId} called`);
     let sender = await Friends.findOne({ accountId: req.user.accountId });
     let receiver = await Friends.findOne({ accountId: req.params.receiverId });
     if (!sender || !receiver) return res.status(403).end();
@@ -143,8 +138,8 @@ app.delete("/friends/api/*/friends*/:receiverId", verifyToken, async (req, res) 
     res.status(204).end();
 });
 
-app.post("/friends/api/*/blocklist*/:receiverId", verifyToken, async (req, res) => {
-    log.debug(`POST /friends/api/*/blocklist*/${req.params.receiverId} called`);
+app.post("/friends/api:receiverId", verifyToken, async (req, res) => {
+    log.debug(`POST /friends/api${req.params.receiverId} called`);
     let sender = await Friends.findOne({ accountId: req.user.accountId });
     let receiver = await Friends.findOne({ accountId: req.params.receiverId });
     if (!sender || !receiver) return res.status(403).end();
@@ -157,8 +152,8 @@ app.post("/friends/api/*/blocklist*/:receiverId", verifyToken, async (req, res) 
     res.status(204).end();
 });
 
-app.delete("/friends/api/*/blocklist*/:receiverId", verifyToken, async (req, res) => {
-    log.debug(`DELETE /friends/api/*/blocklist*/${req.params.receiverId} called`);
+app.delete("/friends/api:receiverId", verifyToken, async (req, res) => {
+    log.debug(`DELETE /friends/api${req.params.receiverId} called`);
     let sender = await Friends.findOne({ accountId: req.user.accountId });
     let receiver = await Friends.findOne({ accountId: req.params.receiverId });
     if (!sender || !receiver) return res.status(403).end();

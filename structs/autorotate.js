@@ -391,7 +391,7 @@ async function discordpost(itemShop) {
             daily: dailyWithPrices
         });
 
-        // Try Discord Bot first
+
         if (config.discord.bUseDiscordBot && global.discordClient && config.bItemShopChannelId) {
             const channel = await global.discordClient.channels.cache.get(config.bItemShopChannelId) ||
                 await global.discordClient.channels.fetch(config.bItemShopChannelId).catch(() => null);

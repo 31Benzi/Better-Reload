@@ -4,7 +4,6 @@ const log = require("../structs/log.js");
 const { verifyToken } = require("../tokenManager/tokenVerify.js");
 const User = require("../model/user.js");
 
-// Profile / Settings
 app.put("/profile/play_region", verifyToken, (req, res) => {
     res.status(204).end();
 });
@@ -45,7 +44,6 @@ app.get("/socialban/api/public/v1/*", verifyToken, (req, res) => {
     res.json({ bans: [], warnings: [] });
 });
 
-// Content / General
 app.get("/hotconfigs/v2/livefn.json", (req, res) => {
     res.json({});
 });
@@ -74,7 +72,6 @@ app.get("/api/v1/access/fortnite/*", (req, res) => {
     res.status(204).end();
 });
 
-// Account Search by ID List
 app.get("/api/v1/public/accounts", async (req, res) => {
     let accountIds = req.query.accountId;
     if (!accountIds) return res.json([]);
@@ -89,27 +86,22 @@ app.get("/api/v1/public/accounts", async (req, res) => {
     res.json(response);
 });
 
-// Surfaces / MOTD
 app.post(["/fortnite/api/fortnite-br/surfaces/dmotd/target", "/api/v1/fortnite-br/surfaces/dmotd/target"], (req, res) => {
     res.json({});
 });
 
-// Ratings
 app.get("/gameRating/gameRating/*", (req, res) => {
     res.redirect("https://i.imgur.com/ImIwpRm.png");
 });
 
-// OAuth Extras
 app.post("/epic/oauth/v2/tokenInfo", (req, res) => {
     res.json({ active: true });
 });
 
-// Telemetry (Silent)
 app.post(["/datarouter/api/v1/public/data", "/datarouter/api/v1/public/data/clients", "/telemetry/data/datarouter/api/v1/public/data"], (req, res) => {
     res.status(204).end();
 });
 
-// Playlist Tiles / Sales Events (Redirect to placeholder if not found)
 app.get(["/salesEvent/salesEvent/*", "/*.jpg", "/*.png"], (req, res) => {
     res.redirect("https://i.imgur.com/ImIwpRm.png");
 });
