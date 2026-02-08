@@ -1,11 +1,11 @@
 {
   "moderators": [
-    "959353708125229147",
+    "discordId1",
     "discordId2"
   ],
   "discord": {
     "bUseDiscordBot": true,
-    "bot_token": "MTQ2ODc0NzMzNDU0NzY2OTE5NQ.Gvrg4x.xYJuZfVlQJvjLlApJ_kpUD7jiZ0nzLffYPKyrA",
+    "bot_token": "",
     "bEnableInGamePlayerCount": true
   },
   "mongodb": {
