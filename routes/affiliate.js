@@ -39,7 +39,11 @@ app.get("/affiliate/api/public/affiliates/slug/:slug", async (req, res) => {
     }
 });
 
-app.post("/fortnite/api/game/v2/profileclient/SetAffiliateName called with slug: ${slug}`);
+app.post("/fortnite/api/game/v2/profileclient/SetAffiliateName", verifyToken, async (req, res) => {
+    const slug = req.body.slug;
+    const lccode = slug.toLowerCase();
+
+    log.debug(`POST /fortnite/api/game/v2/profileclient/SetAffiliateName called with slug: ${slug}`);
 
     const code = await codes.findOne({ code_lower: lccode });
 
@@ -47,7 +51,19 @@ app.post("/fortnite/api/game/v2/profileclient/SetAffiliateName called with slug:
         log.debug(`Affiliate name not found: ${slug}`);
         res.status(404);
         res.json({});
+        return;
     }
+
+    const profiles = await Profile.findOne({ accountId: req.user.accountId });
+    if (!profiles) return res.status(404).json({});
+
+    let profile = profiles.profiles[req.query.profileId || "common_core"];
+    if (!profile) return res.status(404).json({});
+
+    let ApplyProfileChanges = [];
+    let BaseRevision = profile.rvn || 0;
+    let QueryRevision = req.query.rvn || -1;
+    let StatChanged = false;
 
     profile.stats.attributes.mtx_affiliate_set_time = new Date().toISOString();
     profile.stats.attributes.mtx_affiliate = code.code;
@@ -80,7 +96,7 @@ app.post("/fortnite/api/game/v2/profileclient/SetAffiliateName called with slug:
         }];
     }
 
-    await profiles.updateOne({ $set: { [`profiles.${req.query.profileId}`]: profile } });
+    await profiles.updateOne({ $set: { [`profiles.${req.query.profileId || "common_core"}`]: profile } });
 
     res.json({
         "profileRevision": profile.rvn || 0,

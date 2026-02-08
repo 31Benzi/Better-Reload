@@ -18,15 +18,60 @@ app.post("/fortnite/api/game/v2/chat*/pc", (req, res) => {
     res.json(resp);
 });
 
-app.post("/fortnite/api/game/v2/tryPlayOnPlatform/accountEU/WindowsClient", (req, res) => {
-    log.debug("GET /fortnite/api/game/v2/events/tournamentandhistoryrecommendGeneralChatRooms/pc", (req, res) => {
-    log.debug("POST /fortnite/api/game/v2/chatlast-online", async (req, res) => {
-    log.debug("GET /presence/api/v1/_receipts", (req, res) => {
-    log.debug("GET /fortnite/api/receipts/v1/account*", async (req, res) => {
-    log.debug("POST /api/v1/assets/Fortnitevalues", async (req, res) => {
+app.post("/fortnite/api/game/v2/tryPlayOnPlatform/account/:accountId/:platform", (req, res) => {
+    log.debug(`POST /fortnite/api/game/v2/tryPlayOnPlatform/account/${req.params.accountId}/${req.params.platform} called`);
+    res.json({
+        result: true
+    });
+});
+
+app.get("/fortnite/api/game/v2/events/tournamentandhistory", (req, res) => {
+    log.debug("GET /fortnite/api/game/v2/events/tournamentandhistory called");
+    res.json({
+        events: [],
+        history: []
+    });
+});
+
+app.get("/fortnite/api/game/v2/events/tournamentandhistoryrecommendGeneralChatRooms/pc", (req, res) => {
+    log.debug("GET /fortnite/api/game/v2/events/tournamentandhistoryrecommendGeneralChatRooms/pc called");
+    res.json([]);
+});
+
+app.post("/fortnite/api/game/v2/chat", (req, res) => {
+    log.debug("POST /fortnite/api/game/v2/chat called");
+    res.json({
+        "GlobalChatRooms": [{ "roomName": "reloadbackendglobal" }]
+    });
+});
+
+app.get("/fortnite/api/game/v2/tryPlayOnPlatform/account/:accountId/last-online", async (req, res) => {
+    log.debug(`GET /fortnite/api/game/v2/tryPlayOnPlatform/account/${req.params.accountId}/last-online called`);
+    res.json({
+        lastOnline: new Date().toISOString()
+    });
+});
+
+app.get("/presence/api/v1/_/:accountId", (req, res) => {
+    log.debug(`GET /presence/api/v1/_/${req.params.accountId} called`);
+    res.json({
+        accountId: req.params.accountId,
+        status: "online"
+    });
+});
+
+app.get("/fortnite/api/receipts/v1/account/:accountId", async (req, res) => {
+    log.debug(`GET /fortnite/api/receipts/v1/account/${req.params.accountId} called`);
+    res.json({
+        receipts: []
+    });
+});
+
+app.post("/api/v1/assets/Fortnite/:id/values", async (req, res) => {
+    log.debug(`POST /api/v1/assets/Fortnite/${req.params.id}/values called`);
     const epicsettings = require("./../responses/epic-settings.json");
-    res.json(epicsettings)
-})
+    res.json(epicsettings);
+});
 
 app.get("/fortnite/api/game/v2/br-inventory/account/:accountId", async (req, res) => {
     log.debug(`GET /fortnite/api/game/v2/br-inventory/account/${req.params.accountId} called`);

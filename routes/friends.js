@@ -9,23 +9,28 @@ const friendManager = require("../structs/friend.js");
 
 const { verifyToken, verifyClient } = require("../tokenManager/tokenVerify.js");
 
-app.get("/friends/api/v1settings called");
+app.get("/friends/api/v1/settings", verifyToken, async (req, res) => {
+    log.debug("GET /friends/api/v1/settings called");
     res.json({});
 });
 
-app.get("/friends/api/v1blocklist called");
+app.get("/friends/api/v1/blocklist", verifyToken, async (req, res) => {
+    log.debug("GET /friends/api/v1/blocklist called");
     res.json([]);
 });
 
-app.get("/friends/api/public/list/fortniterecentPlayers called");
+app.get("/friends/api/public/list/fortnite", verifyToken, async (req, res) => {
+    log.debug("GET /friends/api/public/list/fortnite called");
     res.json([]);
 });
 
-app.get("/friends/api/v1recent/fortnite called");
+app.get("/friends/api/v1/recent/fortnite", verifyToken, async (req, res) => {
+    log.debug("GET /friends/api/v1/recent/fortnite called");
     res.json([]);
 });
 
-app.all("/friends/api/v1friends/${req.params.friendId}/alias called with method ${req.method}`);
+app.all("/friends/api/v1/:accountId/alias/:friendId", verifyToken, getRawBody, async (req, res) => {
+    log.debug(`ALL /friends/api/v1/${req.params.accountId}/alias/${req.params.friendId} called with method ${req.method}`);
     let friends = await Friends.findOne({ accountId: req.user.accountId });
 
     let validationFail = () => error.createError(

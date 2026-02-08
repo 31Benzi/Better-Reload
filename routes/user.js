@@ -149,9 +149,18 @@ app.get("/v1/avatar/fortnite/ids", async (req, res) => {
     res.json([]);
 });
 
-app.get("/sdk/v1values", (req, res) => {
-    log.debug("ALL /v1/epic-settings/public/usersexternalAuths", (req, res) => {
-    log.debug("GET /account/api/public/account/*/externalAuths called");
+app.get("/sdk/v1/values", (req, res) => {
+    log.debug("GET /sdk/v1/values called");
+    res.json({});
+});
+
+app.all("/v1/epic-settings/public/users", (req, res) => {
+    log.debug("ALL /v1/epic-settings/public/users called");
+    res.json([]);
+});
+
+app.get("/account/api/public/account/:accountId/externalAuths", (req, res) => {
+    log.debug("GET /account/api/public/account/:accountId/externalAuths called");
     res.json([]);
 });
 
